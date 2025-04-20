@@ -1,128 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Choose Your Quote</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Whispering Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #000428, #004e92);
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-
-    button {
-      background-color: #fff;
-      color: #004e92;
-      padding: 15px 25px;
-      margin: 10px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background-color: #004e92;
-      color: white;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      font-family: 'EB Garamond', serif;
+      color: #ffffff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+      transition: background 1s ease;
     }
 
     .quote-box {
-      margin-top: 30px;
-      font-size: 1.5em;
-      font-style: italic;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      text-align: center;
+      max-width: 80%;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: none;
+      animation: fadeIn 2s forwards;
     }
 
-    input[type="number"] {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 10px;
-      border: none;
-      width: 60px;
-      margin: 20px 0;
+    .intro-line {
+      font-size: 1.7rem;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+    }
+
+    .reveal-button, .next-button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .reveal-button:hover, .next-button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .signature {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="intro-line" id="intro">Every soul carries a quote it never speaks out loud...</div>
+  <button class="reveal-button" id="revealBtn">Reveal the Whisper</button>
 
-<h1>Do you want a quote?</h1>
+  <div class="quote-box" id="quoteBox"></div>
+  <button class="next-button" id="nextBtn" style="display:none;">Next Whisper</button>
 
-<div id="options">
-  <button onclick="selectYes()">Yes</button>
-  <button onclick="selectNo()">No</button>
-</div>
+  <div class="signature">Brewed in silence. Inspired by sky, roots, and a cup of blue tea.</div>
 
-<div id="step2"></div>
-<div id="quoteBox" class="quote-box"></div>
+  <script>
+    const quotes = [
+      "Sometimes, silence is the loudest scream.",
+      "The roots remember what the branches forget.",
+      "There’s magic in the unseen, whispered between stars.",
+      "A quote unspoken is still a song inside the soul.",
+      "We are made of stories we never tell anyone."
+    ];
 
-<script>
-  const quotes = [
-    "The best time to start was yesterday. The next best time is now.",
-    "Be yourself; everyone else is already taken.",
-    "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    "Dream big and dare to fail.",
-    "Turn your wounds into wisdom.",
-    "You miss 100% of the shots you don’t take.",
-    "Stars can’t shine without darkness.",
-    "In the middle of every difficulty lies opportunity.",
-    "Don’t count the days, make the days count.",
-    "Do what you can, with what you have, where you are.",
-    "Everything you can imagine is real.",
-    "If you’re going through hell, keep going.",
-    "Life is short, smile while you still have teeth.",
-    "Make each day your masterpiece.",
-    "Whatever you are, be a good one.",
-    "Stay hungry. Stay foolish.",
-    "The harder you work for something, the greater you’ll feel when you achieve it.",
-    "Don’t watch the clock; do what it does. Keep going.",
-    "Push yourself, because no one else is going to do it for you.",
-    "Sometimes later becomes never. Do it now.",
-    "Little things make big days.",
-    "It always seems impossible until it’s done.",
-    "The only limit to our realization of tomorrow is our doubts of today.",
-    "Happiness is not by chance, but by choice."
-  ];
-
-  function selectYes() {
-    document.getElementById("options").style.display = "none";
-    document.getElementById("step2").innerHTML = `
-      <p>Select a number from 1 to 24:</p>
-      <input type="number" id="quoteNumber" min="1" max="24">
-      <button onclick="showSelectedQuote()">Get Quote</button>
-    `;
-  }
-
-  function showSelectedQuote() {
-    const num = parseInt(document.getElementById("quoteNumber").value);
     const quoteBox = document.getElementById("quoteBox");
+    const revealBtn = document.getElementById("revealBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const intro = document.getElementById("intro");
 
-    if (num >= 1 && num <= 24) {
-      quoteBox.innerHTML = `"${quotes[num - 1]}"`;
-    } else {
-      quoteBox.innerHTML = "Please enter a number between 1 and 24.";
+    function getRandomQuote() {
+      return quotes[Math.floor(Math.random() * quotes.length)];
     }
-  }
 
-  function selectNo() {
-    document.getElementById("options").style.display = "none";
-    document.getElementById("step2").innerHTML = `
-      <p>Why not?</p>
-      <button onclick="randomQuote()">I'm afraid</button>
-      <button onclick="randomQuote()">Not interested</button>
-    `;
-  }
+    function showQuote() {
+      quoteBox.style.display = "block";
+      quoteBox.textContent = '';
+      const quote = getRandomQuote();
+      let i = 0;
+      const typewriter = setInterval(() => {
+        quoteBox.textContent += quote.charAt(i);
+        i++;
+        if (i > quote.length - 1) clearInterval(typewriter);
+      }, 50);
+    }
 
-  function randomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    document.getElementById("step2").innerHTML = '';
-    document.getElementById("quoteBox").innerHTML = `"${quotes[randomIndex]}"`;
-  }
-</script>
+    revealBtn.addEventListener("click", () => {
+      intro.style.display = "none";
+      revealBtn.style.display = "none";
+      showQuote();
+      nextBtn.style.display = "inline-block";
+    });
 
+    nextBtn.addEventListener("click", showQuote);
+  </script>
 </body>
 </html>
