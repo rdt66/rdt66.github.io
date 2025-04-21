@@ -70,9 +70,11 @@
   <div id="dot"></div>
 
   <div id="agePrompt" class="question-box hidden">
-    <div>Before we begin... how many seasons have you seen?</div>
-    <input type="number" id="ageInput" placeholder="Enter your age" />
-  </div>
+  <div>Before we begin... how many seasons have you seen?</div>
+  <input type="number" id="ageInput" placeholder="Enter your age" />
+  <button id="ageContinue">Continue</button>
+</div>
+
 
   <div id="colorPrompt" class="question-box hidden">
     <div>Select your favorite color:</div>
