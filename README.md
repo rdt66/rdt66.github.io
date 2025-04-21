@@ -112,5 +112,73 @@
       });
     });
   </script>
+   <script>
+  const dot = document.getElementById("dot");
+  const agePrompt = document.getElementById("agePrompt");
+  const colorPrompt = document.getElementById("colorPrompt");
+  const ageInput = document.getElementById("ageInput");
+
+  dot.addEventListener("click", () => {
+    dot.classList.add("hidden");
+    agePrompt.classList.remove("hidden");
+  });
+
+  ageInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter" && ageInput.value) {
+      agePrompt.classList.add("hidden");
+      colorPrompt.classList.remove("hidden");
+    }
+  });
+
+  // Fix for mobile: add button support
+  document.getElementById("ageContinue").addEventListener("click", () => {
+    if (ageInput.value) {
+      agePrompt.classList.add("hidden");
+      colorPrompt.classList.remove("hidden");
+    }
+  });
+
+  document.querySelectorAll(".color-option").forEach(color => {
+    color.addEventListener("click", () => {
+      const selectedColor = color.getAttribute("data-color");
+      // Redirect to themed page (to be created)
+      window.location.href = `${selectedColor}.html`;
+    });
+  });
+</script
+  const dot = document.getElementById("dot");
+  const agePrompt = document.getElementById("agePrompt");
+  const colorPrompt = document.getElementById("colorPrompt");
+  const ageInput = document.getElementById("ageInput");
+
+  dot.addEventListener("click", () => {
+    dot.classList.add("hidden");
+    agePrompt.classList.remove("hidden");
+  });
+
+  ageInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter" && ageInput.value) {
+      agePrompt.classList.add("hidden");
+      colorPrompt.classList.remove("hidden");
+    }
+  });
+
+  // Fix for mobile: add button support
+  document.getElementById("ageContinue").addEventListener("click", () => {
+    if (ageInput.value) {
+      agePrompt.classList.add("hidden");
+      colorPrompt.classList.remove("hidden");
+    }
+  });
+
+  document.querySelectorAll(".color-option").forEach(color => {
+    color.addEventListener("click", () => {
+      const selectedColor = color.getAttribute("data-color");
+      // Redirect to themed page (to be created)
+      window.location.href = `${selectedColor}.html`;
+    });
+  });
+</script>
+
 </body>
 </html>
